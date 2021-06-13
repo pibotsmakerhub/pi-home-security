@@ -26,6 +26,9 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 #include <BlynkSimpleEsp8266.h>
+#include <WiFiClient.h>
+
+WiFiClient wifiClient;
 
 const char* iftttURL = "http://maker.ifttt.com/trigger/ESP_MOTION/with/key/cngKKJ6py15q3adxlbAvq31ZdN4gFdDH50auMK1THjL";
 const char* ssid = "SSID";          // Your WiFi Name.
@@ -71,7 +74,7 @@ void loop() {
 
         HTTPClient http;                    // Declare an object of class HTTPClient
 
-        http.begin(iftttURL);               // Specify request destination
+        http.begin(wifiClient, iftttURL);               // Specify request destination
         int httpCode = http.GET();          // Send the request
         Serial.println("Done");   
 
